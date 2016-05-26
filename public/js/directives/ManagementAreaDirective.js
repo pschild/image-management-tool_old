@@ -3,19 +3,21 @@ imt.directive('managementArea', function() {
         scope: {
             data: '=',
             title: '@',
-            template: '@',
             handleUpdate: '&onUpdate',
             handleRemove: '&onRemove'
         },
         templateUrl: 'views/managementArea.html',
         link: function(scope, $element, $attrs) {
-            scope.addMode = false;
+            scope.editMode = false;
 
-            scope.$watch('data', function(value) {
-                if (value) {
-                    scope.selectedItem = scope.data[0];
-                }
-            });
+            scope.handleEditClicked = function(item) {
+                scope.selectedItem = item;
+                scope.editMode = true;
+            };
+
+            scope.handleCancelEditClicked = function() {
+                scope.editMode = false;
+            };
 
             scope.update = function() {
                 scope.handleUpdate({
@@ -37,15 +39,6 @@ imt.directive('managementArea', function() {
                 //scope.handleRemove({
                 //    item: scope.selectedItem
                 //});
-            };
-
-            scope.enableAddMode = function() {
-                scope.addMode = true;
-                scope.selectedItem = {};
-            };
-
-            scope.disableAddMode = function() {
-                scope.addMode = false;
             };
         }
     }

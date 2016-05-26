@@ -1,0 +1,45 @@
+<div>
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                <input type="text" class="form-control" placeholder="Suchbegriff" ng-model="keyword">
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>
+                    <a ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        Name
+                        <span ng-show="sortType == 'name' && !sortReverse" class="glyphicon glyphicon-menu-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="glyphicon glyphicon-menu-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a ng-click="sortType = 'birthday'; sortReverse = !sortReverse">
+                        Geburtsdatum
+                        <span ng-show="sortType == 'birthday' && !sortReverse" class="glyphicon glyphicon-menu-down"></span>
+                        <span ng-show="sortType == 'birthday' && sortReverse" class="glyphicon glyphicon-menu-up"></span>
+                    </a>
+                </td>
+                <td>
+                    Aktionen
+                </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="user in data | orderBy:sortType:sortReverse | filter:keyword">
+                <td>{{ user.name }}</td>
+                <td>{{ user.birthday }}</td>
+                <td>
+                    <button class="btn btn-default" ng-click="editItem(user)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button class="btn btn-default"><i class="glyphicon glyphicon-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
