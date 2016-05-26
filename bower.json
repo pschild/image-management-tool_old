@@ -1,0 +1,16 @@
+{
+  "name": "ImageManagementTool",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "underscore": "latest",
+    "jquery": "latest",
+    "ng-tags-input": "latest",
+    "bootstrap-datepicker": "latest",
+    "angular-bootstrap": "latest",
+    "angular-i18n": "latest",
+    "alertify-js": "^1.6.1"
+  }
+}

@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{title}}</h3>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-11">
+                    <select class="form-control" ng-model="selectedItem" ng-options="item.name for item in data" ng-change="addMode = false" ng-disabled="addMode"></select>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-default add-person-button" ng-click="enableAddMode()"><i class="glyphicon glyphicon-plus"></i></button>
+                </div>
+            </div>
+
+            <div ng-include="template"></div>
+
+            <button class="btn btn-success pull-right" ng-click="update()"><i class="glyphicon glyphicon-floppy-disk"></i> Speichern</button>
+            <button class="btn btn-danger pull-right" ng-click="remove()" ng-hide="addMode"><i class="glyphicon glyphicon-trash"></i> Löschen</button>
+            <button class="btn btn-danger pull-right" ng-click="disableAddMode()" ng-show="addMode"><i class="glyphicon glyphicon-remove"></i> Abbrechen</button>
+        </form>
+    </div>
+</div>

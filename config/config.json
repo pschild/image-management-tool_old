@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "image_management_tool",
+    "host": "localhost",
+    "dialect": "mysql",
+    "timezone": "Europe/Berlin",
+    "uploadDir": "public/uploads",
+    "logging": false
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./db.test.sqlite",
+    "uploadDir": "public/uploads"
+  },
+  "production": {
+  }
+}

@@ -1,0 +1,132 @@
+body {
+    margin: 10px 15px 20px 15px;
+}
+
+/* --------------------------------------------------------------------- NAVIGATION --------------------------------------------------------------------- */
+#navigation {
+    list-style: none;
+    padding: 0 0 30px 0;
+}
+
+#navigation li {
+    float: left;
+    padding-right: 20px;
+}
+
+/* --------------------------------------------------------------------- GALLERY --------------------------------------------------------------------- */
+.image-tile {
+    height: 200px;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.folder-tile {
+    height: 200px;
+    margin: 15px 0;
+}
+
+.folder-tile-inner {
+    height: 100%;
+    background: #ddd;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.folder-tile-inner > a {
+    display: block;
+    height: 80%;
+}
+
+.image-tile .image-container {
+    height: 90%;
+    width: 100%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.image-tile .image-checkbox {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+/* --------------------------------------------------------------------- IMAGE --------------------------------------------------------------------- */
+.image-info {
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* --------------------------------------------------------------------- IMAGE MARKER --------------------------------------------------------------------- */
+#image-marker-container {
+    position: relative;
+}
+
+.marker-container {
+    position: absolute;
+    z-index: 1001;
+}
+
+.marker {
+    width: 50px;
+    height: 50px;
+    border: 1px dashed #000;
+    border-radius: 50%;
+}
+
+.marker-container .remove-marker-button {
+    position: absolute;
+    top: -10px;
+    left: 50px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.marker-container .marker-label {
+    font-size: 12px;
+}
+
+#marker-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    z-index: 1000;
+}
+
+#marker-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+}
+
+#marker-form .active-marker {
+    width: 50px;
+    height: 50px;
+    border: 2px dashed #000;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+#marker-form .button-row {
+    margin-top: 5px;
+}
+
+/* --------------------------------------------------------------------- MANAGEMENT --------------------------------------------------------------------- */
+.add-person-button {
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------- SEARCH --------------------------------------------------------------------- */
+.search-label {
+    font-size: 18px;
+    font-style: italic;
+    line-height: 34px;
+}
+
+.search-equals-label {
+    text-align: center;
+}

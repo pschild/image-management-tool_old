@@ -1,0 +1,19 @@
+<div class="form-horizontal">
+    <search-row type="text" on-add-row="addRow()" on-remove-row="removeRow(uuid)" on-change="onChange(data)"></search-row>
+
+    <button class="btn btn-success pull-right" ng-click="startSearch()">Suche starten</button>
+</div>
+
+<br><br>
+
+<div ng-show="results.length == 0">
+    Es wurden keine Bilder gefunden.
+</div>
+
+<div ng-show="results.length > 0">
+    <div>{{results.length}} Ergebnisse</div>
+
+    <div>
+        <img ng-repeat="image in results" src="./{{image.path}}/{{image.name}}.{{image.suffix}}" width="{{100 / results.length}}%" />
+    </div>
+</div>

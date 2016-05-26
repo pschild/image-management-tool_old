@@ -1,0 +1,63 @@
+<h2>Bild bearbeiten</h2>
+
+<div ng-if="!multipleEdit">
+    <image-marker image="image"></image-marker>
+    <span class="image-info">hochgeladen: {{image.createdAt | date:'dd.MM.yyyy HH:mm:ss'}} Uhr</span>
+    <span class="image-info" ng-show="image.updatedAt">| zuletzt geändert: {{image.updatedAt | date:'dd.MM.yyyy HH:mm:ss'}} Uhr</span>
+</div>
+
+<div ng-if="multipleEdit">
+    <img ng-repeat="image in images" src="./uploads/{{image.path}}/{{image.name}}.{{image.suffix}}" width="{{100 / images.length}}%" />
+</div>
+
+<br><br>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Aufnahmedatum</label>
+        <div class="col-sm-10">
+            <p class="input-group">
+                <input type="text"
+                       class="form-control"
+                       uib-datepicker-popup="dd.MM.yyyy"
+                       is-open="calendarOpen"
+                       ng-model="image.shotAt"
+                       show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calendarOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Ort</label>
+        <div class="col-sm-10">
+            <input type="text" placeholder="Ort" ng-model="image.Place" uib-typeahead="place as place.name for place in places | filter:$viewValue" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Tags</label>
+        <div class="col-sm-10">
+            <tags-input
+                    ng-model="image.Tags"
+                    display-property="name"
+                    key-property="name"
+                    placeholder="Tag(s) hinzufügen"
+                    add-from-autocomplete-only="true"
+                    replace-spaces-with-dashes="false"
+                    on-tag-added="addTag($tag)"
+                    on-tag-removed="removeTag($tag)">
+                <auto-complete min-length="1" select-first-match="false" source="filterTags($query)"></auto-complete>
+            </tags-input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Kommentar</label>
+        <div class="col-sm-10">
+            <textarea placeholder="Kommentar" class="form-control" rows="5" ng-model="image.comment"></textarea>
+        </div>
+    </div>
+
+    <button class="btn btn-success pull-right" ng-click="saveImage()">Speichern</button>
+    <button class="btn btn-danger pull-right" ng-hide="multipleEdit" ng-click="deleteImage()">Löschen</button>
+</div>

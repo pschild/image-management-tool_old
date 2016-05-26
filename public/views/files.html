@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-10">
+        <h2>Ordner</h2>
+    </div>
+    <div class="col-sm-2">
+        <button ng-click="showNewDirectory = true">Neuer Ordner</button>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div ng-show="currentFolderPath" class="folder-tile col-lg-2 col-md-3">
+            <div class="folder-tile-inner">
+                <a ng-href="#{{parentFolderPath}}">..</a>
+            </div>
+        </div>
+        <div class="folder-tile col-lg-2 col-md-3" ng-repeat="folderName in folderNames">
+            <div class="folder-tile-inner">
+                <a ng-href="#{{currentUrl}}/{{folderName | encodeURIComponent}}">{{folderName}}</a>
+                <button ng-click="deleteFolder(folderName)">Ordner löschen</button>
+            </div>
+        </div>
+        <div ng-show="showNewDirectory" class="folder-tile col-lg-2 col-md-3">
+            <div class="folder-tile-inner">
+                <input type="text" placeholder="Name des Ordners" ng-model="newDirectoryName" />
+                <button ng-click="showNewDirectory = false">Abbrechen</button>
+                <button ng-click="saveNewDirectory()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10">
+        <h2>Bilder</h2>
+    </div>
+    <div class="col-sm-2">
+        <button ng-click="handleAddImageClicked()">Bilder hochladen</button>
+    </div>
+</div>
+
+<gallery images="images"></gallery>

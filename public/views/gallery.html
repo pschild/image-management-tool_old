@@ -1,0 +1,19 @@
+<a class="btn btn-default" ng-show="bulkList.length > 1" href="/#/image/multipleEdit">{{bulkList.length}} Bilder editieren</a>
+
+<div ng-if="images.length > 0" class="container-fluid" element-marker on-marked="handleSelected(selectedElements)" marker-selector=".image-tile">
+    <div class="row">
+        <div class="image-tile col-lg-2 col-md-3" ng-repeat="image in images">
+            <div class="image-container" ng-style="{'background-image': 'url(\'./uploads/{{image.path}}/{{image.name}}.{{image.suffix}}\')'}" ng-click="openImageForEdit(image)"></div>
+            <input type="checkbox" class="image-checkbox" ng-click="addImageToBulkList(checked, image)" ng-model="checked">
+            <span class="image-info">{{image.createdAt | date:'dd.MM.yyyy HH:mm:ss'}} Uhr</span>
+        </div>
+    </div>
+</div>
+
+<div ng-if="images.length == 0" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            Keine Bilder gefunden
+        </div>
+    </div>
+</div>

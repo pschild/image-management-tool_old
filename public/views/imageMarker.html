@@ -1,0 +1,29 @@
+<div id="image-marker-container">
+    <img src="./uploads/{{image.path}}/{{image.name}}.{{image.suffix}}" class="img-responsive" />
+    <div id="marker-layer"></div>
+
+    <div
+            class="marker-container"
+            ng-repeat="linkedPerson in image.People"
+            ng-style="{'top': 'calc(' + linkedPerson.Link.y + '% - ' + (markerHeight / 2) + 'px)', 'left': 'calc(' + linkedPerson.Link.x + '% - ' + (markerWidth / 2) + 'px)'}"
+            ng-mouseenter="hoveredMarker = true"
+            ng-mouseleave="hoveredMarker = false">
+        <div class="marker"></div>
+        <span class="marker-label">{{linkedPerson.name}}</span>
+        <span class="remove-marker-button" ng-show="hoveredMarker" ng-click="removeLink(linkedPerson)"><i class="glyphicon glyphicon-remove-circle"></i></span>
+    </div>
+
+    <div id="marker-form" ng-show="editMode">
+        <div class="active-marker"></div>
+        <input
+                type="text"
+                placeholder="Person hinzufügen"
+                ng-model="person"
+                uib-typeahead="person as person.name for person in availablePersons | filter:$viewValue"
+                class="form-control">
+        <div class="button-row">
+            <button ng-click="cancel()">Abbrechen</button>
+            <button ng-click="save()">Speichern</button>
+        </div>
+    </div>
+</div>

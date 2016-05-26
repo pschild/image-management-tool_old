@@ -1,0 +1,36 @@
+<div class="form-group">
+    <div class="col-sm-1 search-label">
+        <span class="and-label">UND</span>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" ng-model="data.model" ng-options="model.name for model in models"></select>
+    </div>
+    <div class="col-sm-1 search-label search-equals-label">
+        <span>=</span>
+    </div>
+
+    <div class="col-sm-6" ng-if="data.model.type == 'text'">
+        <input type="text" placeholder="Suchbegriff" ng-model="data.search" class="form-control">
+    </div>
+
+    <div class="col-sm-6" ng-if="data.model.type == 'date'">
+        <p class="input-group">
+            <input type="text"
+                   class="form-control"
+                   uib-datepicker-popup="dd.MM.yyyy"
+                   is-open="calendarOpen"
+                   ng-model="data.shotAt"
+                   show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calendarOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+        </p>
+    </div>
+
+    <div class="col-sm-1">
+        <button class="btn btn-default add-row-button" ng-click="addRow()">+</button>
+    </div>
+    <div class="col-sm-1">
+        <button class="btn btn-default remove-row-button" ng-click="removeRow()">-</button>
+    </div>
+</div>

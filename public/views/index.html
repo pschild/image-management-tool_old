@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+
+    <title>Image Management Tool - by Philippe Schild, 2016</title>
+
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.min.css">
+    <link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+    <link rel="stylesheet" href="libs/alertify-js/build/css/alertify.min.css">
+    <link rel="stylesheet" href="libs/alertify-js/build/css/themes/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="libs/underscore/underscore-min.js"></script>
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/alertify-js/build/alertify.min.js"></script>
+
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="libs/ng-tags-input/ng-tags-input.min.js"></script>
+
+    <script src="libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.de.min.js"></script>
+
+    <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="libs/angular-i18n/angular-locale_de.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers/UploadController.js"></script>
+    <script src="js/controllers/ImageController.js"></script>
+    <script src="js/controllers/ManagementController.js"></script>
+    <script src="js/controllers/SearchController.js"></script>
+    <script src="js/controllers/FilesController.js"></script>
+
+    <script src="js/directives/ImageUploadDirective.js"></script>
+    <script src="js/directives/ImageMarkerDirective.js"></script>
+    <script src="js/directives/ManagementAreaDirective.js"></script>
+    <script src="js/directives/SearchFormDirective.js"></script>
+    <script src="js/directives/SearchRowDirective.js"></script>
+    <script src="js/directives/MarkDirective.js"></script>
+    <script src="js/directives/GalleryDirective.js"></script>
+
+    <script src="js/services/ImageService.js"></script>
+    <script src="js/services/PersonService.js"></script>
+    <script src="js/services/PlaceService.js"></script>
+    <script src="js/services/TagService.js"></script>
+    <script src="js/services/UploadService.js"></script>
+    <script src="js/services/LinkService.js"></script>
+    <script src="js/services/FolderStructureService.js"></script>
+</head>
+<body ng-app="imt">
+    <ul id="navigation">
+        <li>
+            <a href="/#/files">Bilder</a>
+        </li>
+        <li>
+            <a href="/#/management">Verwaltung</a>
+        </li>
+        <li>
+            <a href="/#/search">Suche</a>
+        </li>
+    </ul>
+
+    <div style="clear: left;" ui-view></div>
+</body>
+</html>

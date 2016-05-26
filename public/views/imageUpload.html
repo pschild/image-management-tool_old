@@ -1,0 +1,11 @@
+<p>Ordner: {{'./uploads/' + currentFolderPath}}</p>
+<div class="upload-area">
+    <input style="display:none;" class="file-dialog" type="file" multiple />
+    <div class="chosen-files-list">
+        <ul>
+            <li ng-repeat="file in chosenFiles">{{file.name}}</li>
+        </ul>
+    </div>
+    <button class="choose-images-button">Bilder auswählen ...</button>
+    <button class="upload-images-button">hochladen</button>
+</div>
