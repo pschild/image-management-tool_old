@@ -1,4 +1,4 @@
-imt.controller('FilesController', function ($scope, $location, $stateParams, FolderStructureService) {
+imt.controller('FilesController', function ($scope, $location, $stateParams, FolderStructureService, AlertifyService) {
     var self = this;
 
     $scope.currentUrl = $location.path();
@@ -19,7 +19,7 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
         FolderStructureService.get($scope.currentFolderPath).then(
             function(response) {
                 if (!response.data.success) {
-                    alert('Error: ' + response.data.message);
+                    AlertifyService.error('Fehler: ' + response.data.message);
                     return;
                 }
                 $scope.folderNames = response.data.folderNames;
@@ -34,9 +34,8 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
     };
 
     $scope.saveNewDirectory = function() {
-        console.log($scope.newDirectoryName);
         if ($scope.newDirectoryName == '') {
-            alert('Bitte geben Sie einen Namen ein.');
+            AlertifyService.alert('Hinweis', 'Bitte geben Sie einen Namen ein.');
             return;
         }
 
@@ -48,19 +47,19 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
                 var success = response.data.success;
 
                 if (success) {
+                    AlertifyService.success('Ordner "' + $scope.newDirectoryName + '" wurde angelegt.');
                     $scope.newDirectoryName = '';
                     $scope.showNewDirectory = false;
                     self.getFoldersAndImages();
                 } else {
-                    alert('Fehler: ' + response.data.errorMessage);
+                    AlertifyService.error('Fehler: ' + response.data.errorMessage);
                 }
             }
         );
     };
 
     $scope.deleteFolder = function(directoryName) {
-        var sure = confirm('Soll der Ordner "' + directoryName + '" wirklich gelöscht werden? Alle darin enthaltenen Ordner und Bilder gehen dabei verloren!');
-        if (sure) {
+        AlertifyService.confirm('Ordner löschen', 'Soll der Ordner "' + directoryName + '" wirklich gelöscht werden? Alle darin enthaltenen Ordner und Bilder gehen dabei verloren!', function() {
             FolderStructureService.removeDirectory({
                 currentFolderPath: $scope.currentFolderPath,
                 directoryName: directoryName
@@ -70,11 +69,12 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
 
                     if (success) {
                         self.getFoldersAndImages();
+                        AlertifyService.success('Ordner "' + directoryName + '" wurde gelöscht.');
                     } else {
-                        alert('Fehler: ' + response.data.errorMessage);
+                        AlertifyService.error('Fehler: ' + response.data.errorMessage);
                     }
                 }
             );
-        }
+        });
     };
 });

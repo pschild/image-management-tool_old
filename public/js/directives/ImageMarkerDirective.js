@@ -1,4 +1,4 @@
-imt.directive('imageMarker', function($timeout, PersonService, LinkService) {
+imt.directive('imageMarker', function($timeout, PersonService, LinkService, AlertifyService) {
     return {
         scope: {
             image: '='
@@ -84,14 +84,14 @@ imt.directive('imageMarker', function($timeout, PersonService, LinkService) {
                     scope.image.People.push(linkObject);
 
                     LinkService.add(scope.image.id, linkObject).then(function() {
-                        console.log('link saved');
+                        AlertifyService.success('Verlinkung gespeichert');
 
                         scope.person = null;
                         scope.editMode = false;
                         self.updateAvailablePersons();
                     });
                 } else {
-                    alert('unknown person');
+                    AlertifyService.alert('Hinweis', 'Sie haben eine unbekannte Person hinterlegt.');
                 }
             };
 
@@ -101,7 +101,7 @@ imt.directive('imageMarker', function($timeout, PersonService, LinkService) {
 
             scope.removeLink = function(removedPerson) {
                 LinkService.remove(removedPerson.Link).then(function() {
-                    console.log('link removed');
+                    AlertifyService.success('Verlinkung entfernt');
 
                     scope.image.People = scope.image.People.filter(function(linkedPerson) {
                         return linkedPerson.id != removedPerson.id;

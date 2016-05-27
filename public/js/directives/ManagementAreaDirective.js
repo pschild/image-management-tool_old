@@ -1,4 +1,4 @@
-imt.directive('managementArea', function() {
+imt.directive('managementArea', function(AlertifyService) {
     return {
         scope: {
             data: '=',
@@ -28,17 +28,11 @@ imt.directive('managementArea', function() {
             };
 
             scope.handleRemoveItemClicked = function(item) {
-                scope.handleRemove({
-                    item: item
+                AlertifyService.confirm('Eintrag löschen', 'Sind Sie sich, dass Sie den ausgewählten Eintrag löschen wollen?', function() {
+                    scope.handleRemove({
+                        item: item
+                    });
                 });
-                //alertify.confirm('confirm').set({transition:'zoom', message: 'Wirklich löschen?'}).show();
-//                alertify.confirm('Sicher?', function() {
-//                    console.log(123);
-//                }).set({
-//                    transition: 'zoom',
-//                    message: 'Wirklich löschen?',
-//                    labels: {ok: 'Ja', cancel: 'Nein'}
-//                }).show();
             };
         }
     }

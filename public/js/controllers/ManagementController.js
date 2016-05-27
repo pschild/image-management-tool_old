@@ -1,6 +1,4 @@
-imt.controller('ManagementController', function ($scope, PersonService, PlaceService, TagService) {
-    var self = this;
-
+imt.controller('ManagementController', function ($scope, PersonService, PlaceService, TagService, AlertifyService) {
     this.loadPersons = function() {
         PersonService.getAll().then(function(response) {
             $scope.persons = response.data;
@@ -36,13 +34,18 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
             }).then(
                 function(response) {
                     $scope.persons.push(response.data);
+                    AlertifyService.success('Person gespeichert');
                 }
             );
         } else {
             PersonService.update(item.id, {
                 name: item.name,
                 birthday: item.birthday
-            });
+            }).then(
+                function() {
+                    AlertifyService.success('Person gespeichert');
+                }
+            );
         }
     };
 
@@ -59,6 +62,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                         }
                     }
                     $scope.persons = newPersons;
+
+                    AlertifyService.success('Person gelöscht');
                 }
             );
         }
@@ -73,6 +78,7 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
             }).then(
                 function(response) {
                     $scope.places.push(response.data);
+                    AlertifyService.success('Ort gespeichert');
                 }
             );
         } else {
@@ -80,7 +86,11 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                 name: item.name,
                 address: item.address,
                 country: item.country
-            });
+            }).then(
+                function() {
+                    AlertifyService.success('Ort gespeichert');
+                }
+            );
         }
     };
 
@@ -97,6 +107,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                         }
                     }
                     $scope.places = newPlaces;
+
+                    AlertifyService.success('Ort gelöscht');
                 }
             );
         }
@@ -109,12 +121,17 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
             }).then(
                 function(response) {
                     $scope.tags.push(response.data);
+                    AlertifyService.success('Tag gespeichert');
                 }
             );
         } else {
             TagService.update(item.id, {
                 name: item.name
-            });
+            }).then(
+                function() {
+                    AlertifyService.success('Tag gespeichert');
+                }
+            );
         }
     };
 
@@ -131,6 +148,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                         }
                     }
                     $scope.tags = newTags;
+
+                    AlertifyService.success('Tag gelöscht');
                 }
             );
         }

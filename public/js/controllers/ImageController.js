@@ -1,4 +1,4 @@
-imt.controller('ImageController', function ($scope, $location, $stateParams, ImageService, PersonService, PlaceService, TagService) {
+imt.controller('ImageController', function ($scope, $location, $stateParams, ImageService, PersonService, PlaceService, TagService, AlertifyService) {
     $scope.multipleEdit = $stateParams.id ? false : true;
 
     if (!$scope.multipleEdit) {
@@ -38,22 +38,24 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, Ima
     $scope.saveImage = function() {
         if (!$scope.multipleEdit) {
             ImageService.update($scope.image).then(function() {
-                console.log('saved');
+                AlertifyService.success('Bild gespeichert');
             });
         } else {
             $scope.images.forEach(function(image) {
                 image = _.extend(image, $scope.image);
                 ImageService.update(image).then(function() {
-                    console.log('saved');
+                    AlertifyService.success('Bild gespeichert');
                 });
             });
         }
     };
 
     $scope.deleteImage = function() {
-        ImageService.delete($scope.image.id).then(function() {
-            console.log('deleted');
-            $location.path('files');
+        AlertifyService.confirm('Bild löschen', 'Sind Sie sich, dass Sie dieses Bild löschen wollen?', function() {
+            ImageService.delete($scope.image.id).then(function() {
+                AlertifyService.success('Bild gelöscht');
+                $location.path('files');
+            });
         });
     };
 });

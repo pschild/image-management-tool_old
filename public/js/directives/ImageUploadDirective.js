@@ -1,4 +1,4 @@
-imt.directive('imageUpload', function($stateParams, UploadService) {
+imt.directive('imageUpload', function($stateParams, UploadService, AlertifyService) {
     return {
         scope: {},
         templateUrl: 'views/imageUpload.html',
@@ -26,20 +26,18 @@ imt.directive('imageUpload', function($stateParams, UploadService) {
                 var filePaths = [];
                 for (var i = 0; i < files.length; i++) {
                     if (!files[i].path) {
-                        throw new Error('Could not find path-attribute for file. This is only working in a NW.js built version for desktop.');
+                        AlertifyService.error('Fehler: Bilder konnten nicht hochgeladen werden. Verwenden Sie die Anwendung als Desktop-Anwendung?');
                     }
                     filePaths.push(files[i].path);
                 }
 
                 UploadService.upload({filePaths: filePaths, currentFolderPath: scope.currentFolderPath}).then(
                     function(response) {
-                        console.log('success', response);
-
-                        alert('Bilder wurden hochgeladen.');
+                        AlertifyService.success('Bild(er) wurden hochgeladen');
                         scope.chosenFiles = [];
                     },
                     function(response) {
-                        console.log('error', response);
+                        AlertifyService.error('Fehler: ' + response);
                     }
                 );
             });
