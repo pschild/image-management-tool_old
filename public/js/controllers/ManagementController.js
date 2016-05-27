@@ -56,8 +56,7 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
         }
     };
 
-    $scope.updatePlace = function(item) {
-        console.log(item);
+    $scope.savePlace = function(item) {
         if (!item.id) {
             PlaceService.create({
                 name: item.name,
@@ -87,7 +86,7 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
         }
     };
 
-    $scope.updateTag = function(item) {
+    $scope.saveTag = function(item) {
         if (!item.id) {
             TagService.create({
                 name: item.name

@@ -1,5 +1,5 @@
 <h2>Verwaltung</h2>
 
-<management-area data="persons" title="Personen bearbeiten" on-save="savePerson(item)" on-remove="removePerson(item)"></management-area>
-<!--<management-area data="places" title="Orte bearbeiten" template="views/management/places.html" on-update="updatePlace(item)" on-remove="removePlace(item)"></management-area>-->
-<!--<management-area data="tags" title="Tags bearbeiten" template="views/management/tags.html" on-update="updateTag(item)" on-remove="removeTag(item)"></management-area>-->
+<management-area data="persons" type="persons" title="Personen bearbeiten" on-save="savePerson(item)" on-remove="removePerson(item)"></management-area>
+<management-area data="places" type="places" title="Orte bearbeiten" on-save="savePlace(item)" on-remove="removePlace(item)"></management-area>
+<management-area data="tags" type="tags" title="Tags bearbeiten" on-save="saveTag(item)" on-remove="removeTag(item)"></management-area>
