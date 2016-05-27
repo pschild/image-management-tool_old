@@ -15,6 +15,10 @@ Example for XAMPP with PhpMyAdmin:
 
 Open the PhpMyAdmin GUI and add a database called ```image_management_tool```. The tables will be added when the app is first started.
 
+## Creating the upload folder
+
+Add the folder ```public/uploads```. In this folder your uploaded images will be saved.
+
 ## Starting the application
 
 ```
@@ -50,7 +54,7 @@ and
 (http://docs.nwjs.io/en/latest/For%20Users/Package%20and%20Distribute/#prepare-your-app)
 for more.
 
-Attention: Some methods found at the links won't work, because the application needs to access the directories in public/uploads.
+Attention: Some methods found at the links won't work, because the application needs to access the directories in ```public/uploads```.
 So e.g. the method where the files are packaged as nw-file doesn't work.
 
 
