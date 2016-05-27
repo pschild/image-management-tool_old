@@ -21,7 +21,7 @@ Open the PhpMyAdmin GUI and add a database called ```image_management_tool```. T
 npm start
 ```
 This will start the express server on port 8080. Just open [http://localhost:8080](http://localhost:8080).
-To adjust the node environment (see config/config.json), just change set NODE_ENV=??? in package.json.
+To adjust the node environment (see ```config/config.json```), just change set NODE_ENV=??? in package.json.
 
 ```
 npm run nw
@@ -38,9 +38,9 @@ be disabled. This is done by setting ```"logging":false``` in file config/config
 To deploy the application, so that it will be executable on any machine, the following steps need to be done:
 
 1. Create a new directory
-2. Copy the content of the root folder (with package.json) in it into this directory
-3. Copy the content of the folder C:\Users\Philippe\AppData\Roaming\npm\node_modules\nw\nwjs into this directory
-4. Start the app with nw.exe
+2. Copy the content of the root folder (with ```package.json```) in it into this directory
+3. Copy the content of the folder ```node_modules\nw\nwjs``` into this directory
+4. Start the app with ```nw.exe```
 
 This is only one way of doing the deployment. See
 [here]
