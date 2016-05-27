@@ -1,6 +1,6 @@
 <h2>Bild bearbeiten</h2>
 
-<div ng-if="!multipleEdit">
+<div ng-if="!multipleEdit" class="container">
     <image-marker image="image"></image-marker>
     <span class="image-info">hochgeladen: {{image.createdAt | date:'dd.MM.yyyy HH:mm:ss'}} Uhr</span>
     <span class="image-info" ng-show="image.updatedAt">| zuletzt geändert: {{image.updatedAt | date:'dd.MM.yyyy HH:mm:ss'}} Uhr</span>
@@ -12,7 +12,7 @@
 
 <br><br>
 
-<div class="form-horizontal">
+<div class="form-horizontal container">
     <div class="form-group">
         <label class="col-sm-2 control-label">Aufnahmedatum</label>
         <div class="col-sm-10">
@@ -58,6 +58,6 @@
         </div>
     </div>
 
-    <button class="btn btn-success pull-right" ng-click="saveImage()">Speichern</button>
-    <button class="btn btn-danger pull-right" ng-hide="multipleEdit" ng-click="deleteImage()">Löschen</button>
+    <button class="btn btn-success pull-right" ng-click="saveImage()"><i class="glyphicon glyphicon-floppy-disk"></i> Speichern</button>
+    <button class="btn btn-danger pull-right" ng-hide="multipleEdit" ng-click="deleteImage()"><i class="glyphicon glyphicon-trash"></i> Löschen</button>
 </div>

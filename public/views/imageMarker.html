@@ -22,8 +22,8 @@
                 uib-typeahead="person as person.name for person in availablePersons | filter:$viewValue"
                 class="form-control">
         <div class="button-row">
-            <button ng-click="cancel()">Abbrechen</button>
-            <button ng-click="save()">Speichern</button>
+            <button class="btn btn-danger" ng-click="cancel()"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-success" ng-disabled="person == '' || person == null" ng-click="save()"><i class="glyphicon glyphicon-floppy-disk"></i></button>
         </div>
     </div>
 </div>
