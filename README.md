@@ -41,7 +41,7 @@ be disabled. This is done by setting ```"logging":false``` in file ```config/con
 
 **[0527/094737:ERROR:process_info.cc(608)] range at 0xff0d4c7800000000, size 0x6a fully unreadable**
 
-Version 0.13.2[-sdk] of node-webkit (nw) must be used at the moment. Newer versions are causing an errors like when uploading images.
+Version 0.13.2[-sdk] of node-webkit (nw) must be used at the moment. Newer versions are causing errors when uploading images.
 
 ## Deploying the application
 
