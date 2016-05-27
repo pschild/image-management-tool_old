@@ -28,7 +28,7 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
     this.loadPlaces();
     this.loadTags();
 
-    $scope.updatePerson = function(item) {
+    $scope.savePerson = function(item) {
         if (!item.id) {
             PersonService.create({
                 name: item.name,

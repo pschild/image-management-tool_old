@@ -3,7 +3,8 @@ imt.directive('managementAreaTable', function() {
         scope: {
             data: '=',
             template: '@',
-            onEditClicked: '&'
+            onEditClicked: '&',
+            onRemoveClicked: '&'
         },
         templateUrl: 'views/management/managementAreaTable.html',
         link: function(scope, $element, $attrs) {
@@ -13,6 +14,12 @@ imt.directive('managementAreaTable', function() {
 
             scope.editItem = function(item) {
                 scope.onEditClicked({
+                    item: item
+                });
+            };
+
+            scope.removeItem = function(item) {
+                scope.onRemoveClicked({
                     item: item
                 });
             };

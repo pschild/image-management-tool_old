@@ -3,10 +3,17 @@ imt.directive('managementAreaForm', function() {
         scope: {
             item: '=',
             template: '@',
-            onCancelEditClicked: '&'
+            onCancelEditClicked: '&',
+            onSaveItemClicked: '&'
         },
         templateUrl: 'views/management/managementAreaForm.html',
         link: function(scope, $element, $attrs) {
+            scope.saveItem = function() {
+                scope.onSaveItemClicked({
+                    item: scope.item
+                });
+            };
+
             scope.cancelEdit = function() {
                 scope.onCancelEditClicked();
             };

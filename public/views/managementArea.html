@@ -27,7 +27,7 @@
     </div>
 
     <div class="panel-body">
-        <management-area-table ng-show="editMode == false" data="data" template="views/management/table/persons.html" on-edit-clicked="handleEditClicked(item)"></management-area-table>
-        <management-area-form ng-show="editMode == true" item="selectedItem" template="views/management/form/persons.html" on-cancel-edit-clicked="handleCancelEditClicked()"></management-area-form>
+        <management-area-table ng-show="editMode == false" data="data" template="views/management/table/persons.html" on-edit-clicked="handleEditClicked(item)" on-remove-clicked="handleRemoveItemClicked(item)"></management-area-table>
+        <management-area-form ng-show="editMode == true" item="selectedItem" template="views/management/form/persons.html" on-save-item-clicked="handleSaveItemClicked(item)" on-cancel-edit-clicked="handleCancelEditClicked()"></management-area-form>
     </div>
 </div>

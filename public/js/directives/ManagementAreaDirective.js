@@ -3,7 +3,7 @@ imt.directive('managementArea', function() {
         scope: {
             data: '=',
             title: '@',
-            handleUpdate: '&onUpdate',
+            handleSave: '&onSave',
             handleRemove: '&onRemove'
         },
         templateUrl: 'views/managementArea.html',
@@ -19,26 +19,26 @@ imt.directive('managementArea', function() {
                 scope.editMode = false;
             };
 
-            scope.update = function() {
-                scope.handleUpdate({
-                    item: scope.selectedItem
+            scope.handleSaveItemClicked = function(item) {
+                scope.handleSave({
+                    item: item
                 });
 
-                scope.disableAddMode();
+                scope.editMode = false;
             };
 
-            scope.remove = function() {
+            scope.handleRemoveItemClicked = function(item) {
+                scope.handleRemove({
+                    item: item
+                });
                 //alertify.confirm('confirm').set({transition:'zoom', message: 'Wirklich löschen?'}).show();
-                alertify.confirm('Sicher?', function() {
-                    console.log(123);
-                }).set({
-                    transition: 'zoom',
-                    message: 'Wirklich löschen?',
-                    labels: {ok: 'Ja', cancel: 'Nein'}
-                }).show();
-                //scope.handleRemove({
-                //    item: scope.selectedItem
-                //});
+//                alertify.confirm('Sicher?', function() {
+//                    console.log(123);
+//                }).set({
+//                    transition: 'zoom',
+//                    message: 'Wirklich löschen?',
+//                    labels: {ok: 'Ja', cancel: 'Nein'}
+//                }).show();
             };
         }
     }
