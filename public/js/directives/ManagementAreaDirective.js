@@ -2,7 +2,6 @@ imt.directive('managementArea', function() {
     return {
         scope: {
             data: '=',
-            title: '@',
             type: '@',
             handleSave: '&onSave',
             handleRemove: '&onRemove'

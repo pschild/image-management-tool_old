@@ -32,7 +32,7 @@ npm run nw
 ```
 This will automatically start the application as node-webkit application.
 
-## Troubleshoot
+## Troubleshooting
 
 **Uncaught TypeError: Illegal invocation (in promised-io/promises.js:242)**
 

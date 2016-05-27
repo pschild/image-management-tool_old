@@ -1,10 +1,4 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{title}}</h3>
-    </div>
-
-    <div class="panel-body">
-        <management-area-table ng-show="editMode == false" data="data" template="views/management/table/{{type}}.html" on-edit-clicked="handleEditClicked(item)" on-remove-clicked="handleRemoveItemClicked(item)"></management-area-table>
-        <management-area-form ng-show="editMode == true" item="selectedItem" template="views/management/form/{{type}}.html" on-save-item-clicked="handleSaveItemClicked(item)" on-cancel-edit-clicked="handleCancelEditClicked()"></management-area-form>
-    </div>
+<div class="management-area-container">
+    <management-area-table ng-show="editMode == false" data="data" template="views/management/table/{{type}}.html" on-edit-clicked="handleEditClicked(item)" on-remove-clicked="handleRemoveItemClicked(item)"></management-area-table>
+    <management-area-form ng-show="editMode == true" item="selectedItem" template="views/management/form/{{type}}.html" on-save-item-clicked="handleSaveItemClicked(item)" on-cancel-edit-clicked="handleCancelEditClicked()"></management-area-form>
 </div>

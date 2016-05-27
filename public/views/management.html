@@ -1,5 +1,13 @@
 <h2>Verwaltung</h2>
 
-<management-area data="persons" type="persons" title="Personen bearbeiten" on-save="savePerson(item)" on-remove="removePerson(item)"></management-area>
-<management-area data="places" type="places" title="Orte bearbeiten" on-save="savePlace(item)" on-remove="removePlace(item)"></management-area>
-<management-area data="tags" type="tags" title="Tags bearbeiten" on-save="saveTag(item)" on-remove="removeTag(item)"></management-area>
+<uib-tabset>
+    <uib-tab index="0" heading="Personen">
+        <management-area data="persons" type="persons" on-save="savePerson(item)" on-remove="removePerson(item)"></management-area>
+    </uib-tab>
+    <uib-tab index="1" heading="Orte">
+        <management-area data="places" type="places" on-save="savePlace(item)" on-remove="removePlace(item)"></management-area>
+    </uib-tab>
+    <uib-tab index="2" heading="Tags">
+        <management-area data="tags" type="tags" on-save="saveTag(item)" on-remove="removeTag(item)"></management-area>
+    </uib-tab>
+</uib-tabset>
