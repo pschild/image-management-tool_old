@@ -34,8 +34,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                 name: item.name,
                 birthday: item.birthday
             }).then(
-                function() {
-                    self.loadPersons();
+                function(response) {
+                    $scope.persons.push(response.data);
                 }
             );
         } else {
@@ -50,7 +50,15 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
         if (item.id) {
             PersonService.delete(item.id).then(
                 function() {
-                    self.loadPersons();
+                    var newPersons = [];
+                    var person;
+                    for (var i = 0; i < $scope.persons.length; i++) {
+                        person = $scope.persons[i];
+                        if (person.id != item.id) {
+                            newPersons.push(person);
+                        }
+                    }
+                    $scope.persons = newPersons;
                 }
             );
         }
@@ -63,8 +71,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
                 address: item.address,
                 country: item.country
             }).then(
-                function() {
-                    self.loadPlaces();
+                function(response) {
+                    $scope.places.push(response.data);
                 }
             );
         } else {
@@ -80,7 +88,15 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
         if (item.id) {
             PlaceService.delete(item.id).then(
                 function() {
-                    self.loadPlaces();
+                    var newPlaces = [];
+                    var place;
+                    for (var i = 0; i < $scope.places.length; i++) {
+                        place = $scope.places[i];
+                        if (place.id != item.id) {
+                            newPlaces.push(place);
+                        }
+                    }
+                    $scope.places = newPlaces;
                 }
             );
         }
@@ -91,8 +107,8 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
             TagService.create({
                 name: item.name
             }).then(
-                function() {
-                    self.loadTags();
+                function(response) {
+                    $scope.tags.push(response.data);
                 }
             );
         } else {
@@ -106,7 +122,15 @@ imt.controller('ManagementController', function ($scope, PersonService, PlaceSer
         if (item.id) {
             TagService.delete(item.id).then(
                 function() {
-                    self.loadTags();
+                    var newTags = [];
+                    var tag;
+                    for (var i = 0; i < $scope.tags.length; i++) {
+                        tag = $scope.tags[i];
+                        if (tag.id != item.id) {
+                            newTags.push(tag);
+                        }
+                    }
+                    $scope.tags = newTags;
                 }
             );
         }
