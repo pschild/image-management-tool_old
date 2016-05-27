@@ -6,6 +6,14 @@
 npm install && bower install
 ```
 
+## Creating the database
+
+Since the application is based on a database (MySQL in development environment, see ```config/config.json```), a database needs
+to be setup before we can start.
+
+Example for XAMPP with PhpMyAdmin:
+Open the PhpMyAdmin GUI and add a database called ```image_management_tool```. The tables will be added when the app is first started.
+
 ## Starting the application
 
 ```
