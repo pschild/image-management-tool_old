@@ -2,6 +2,11 @@
   "main": "index.html",
   "name": "ImageManagementTool",
   "description": "A tool for managing images",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pschild/image-management-tool.git"
+  },
+  "license": "MIT",
   "version": "0.0.1",
   "window": {
     "title": "ImageManagementTool - by Philippe Schild",
@@ -28,12 +33,12 @@
     "mysql": "^2.10.2",
     "nw": "0.13.2-sdk",
     "promise-mysql": "^1.3.2",
-    "promised-io": "latest",
-    "randomstring": "latest",
+    "promised-io": "^0.3.5",
+    "randomstring": "^1.1.5",
     "sequelize": "^3.3.2",
     "sequelize-cli": "^1.7.1",
     "sqlite3": "^3.0.8",
-    "underscore": "latest"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "bluebird": "^2.9.33",
