@@ -127,7 +127,7 @@ module.exports = function (app) {
         if (!allowedPattern.test(newDirectoryName)) {
             res.json({
                 success: false,
-                errorMessage: 'Der Ordnername darf nur Buchstaben, Zahlen und Leerzeichen enthalten.'
+                errorMessage: 'Der Ordnername darf nur Buchstaben (keine Umlaute), Zahlen und Leerzeichen enthalten.'
             });
             return;
         }

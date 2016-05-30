@@ -11,6 +11,8 @@
     "bootstrap-datepicker": "latest",
     "angular-bootstrap": "latest",
     "angular-i18n": "latest",
-    "alertify-js": "^1.6.1"
+    "alertify-js": "^1.6.1",
+    "awesome-bootstrap-checkbox": "^0.3.7",
+    "font-awesome": "^4.6.3"
   }
 }

@@ -1,16 +1,21 @@
 body {
-    margin: 10px 15px 20px 15px;
+    margin-bottom: 20px;
 }
 
 h2 {
     margin: 0;
+    margin-bottom: 20px;
     display: inline-block;
+}
+
+.button-row {
+    margin-top: 5px;
 }
 
 /* --------------------------------------------------------------------- NAVIGATION --------------------------------------------------------------------- */
 #navigation {
     list-style: none;
-    padding: 0 0 30px 0;
+    padding: 20px 0 30px 0;
 }
 
 #navigation li {
@@ -37,6 +42,10 @@ h2 {
     cursor: pointer;
 }
 
+.folder-tile-inner.new-folder {
+    border: 1px dashed #000;
+}
+
 .folder-tile-inner > a {
     display: block;
     height: 80%;
@@ -50,7 +59,7 @@ h2 {
     background-repeat: no-repeat;
 }
 
-.image-tile .image-checkbox {
+.image-tile .checkbox {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -114,10 +123,6 @@ h2 {
     border: 2px dashed #000;
     border-radius: 50%;
     margin-bottom: 5px;
-}
-
-#marker-form .button-row {
-    margin-top: 5px;
 }
 
 /* --------------------------------------------------------------------- MANAGEMENT --------------------------------------------------------------------- */

@@ -34,7 +34,7 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
     };
 
     $scope.saveNewDirectory = function() {
-        if ($scope.newDirectoryName == '') {
+        if ($scope.newDirectoryName == '' || $scope.newDirectoryName.replace(/ /g, '') == '') {
             AlertifyService.alert('Hinweis', 'Bitte geben Sie einen Namen ein.');
             return;
         }

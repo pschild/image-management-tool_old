@@ -1,36 +1,36 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Ordner</h2>
-        <button class="btn btn-default pull-right" ng-click="showNewDirectory = true">Neuer Ordner</button>
+        <button class="btn btn-default pull-right" ng-click="showNewDirectory = true"><i class="fa fa-folder"></i> Neuer Ordner</button>
+    </div>
+</div>
+
+<div class="row">
+    <div ng-show="currentFolderPath" class="folder-tile col-lg-2 col-md-3 col-sm-4 col-xs-6">
+        <div class="folder-tile-inner">
+            <a ng-href="#{{parentFolderPath}}"><i class="glyphicon glyphicon-level-up"></i> aufwärts</a>
+        </div>
+    </div>
+    <div class="folder-tile col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-repeat="folderName in folderNames">
+        <div class="folder-tile-inner">
+            <a ng-href="#{{currentUrl}}/{{folderName | encodeURIComponent}}">{{folderName}}</a>
+            <button class="btn btn-danger" ng-click="deleteFolder(folderName)"><i class="glyphicon glyphicon-trash"></i> Ordner löschen</button>
+        </div>
+    </div>
+    <div ng-show="showNewDirectory" class="folder-tile col-lg-2 col-md-3 col-sm-4 col-xs-6">
+        <div class="folder-tile-inner new-folder">
+            <form class="form-inline">
+                <input class="form-control" type="text" placeholder="Name des Ordners" ng-model="newDirectoryName" />
+                <div class="button-row">
+                    <button class="btn btn-danger" ng-click="showNewDirectory = false"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button class="btn btn-success" ng-disabled="newDirectoryName == ''" ng-click="saveNewDirectory()"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 <hr/>
-
-<div class="container-fluid">
-    <div class="row">
-        <div ng-show="currentFolderPath" class="folder-tile col-lg-2 col-md-3">
-            <div class="folder-tile-inner">
-                <a ng-href="#{{parentFolderPath}}"><i class="glyphicon glyphicon-level-up"></i> aufwärts</a>
-            </div>
-        </div>
-        <div class="folder-tile col-lg-2 col-md-3" ng-repeat="folderName in folderNames">
-            <div class="folder-tile-inner">
-                <a ng-href="#{{currentUrl}}/{{folderName | encodeURIComponent}}">{{folderName}}</a>
-                <button class="btn btn-danger" ng-click="deleteFolder(folderName)"><i class="glyphicon glyphicon-trash"></i> Ordner löschen</button>
-            </div>
-        </div>
-        <div ng-show="showNewDirectory" class="folder-tile col-lg-2 col-md-3">
-            <div class="folder-tile-inner">
-                <form class="form-inline">
-                    <input class="form-control" type="text" placeholder="Name des Ordners" ng-model="newDirectoryName" />
-                    <button class="btn btn-danger" ng-click="showNewDirectory = false">Abbrechen</button>
-                    <button class="btn btn-success" ng-click="saveNewDirectory()">OK</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-sm-12">
