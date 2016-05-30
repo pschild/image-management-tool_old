@@ -130,11 +130,13 @@ h2 {
     padding: 20px 10px 0 10px;
 }
 
-.management-area-table > table {
+.management-area-table .management-table-wrapper {
     margin-top: 10px;
+    max-height: 700px;
+    overflow-y: auto;
 }
 
-.management-area-table > table td > a {
+.management-area-table table td > a {
     cursor: pointer;
 }
 
