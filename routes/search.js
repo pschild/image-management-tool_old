@@ -16,14 +16,15 @@ module.exports = function(app) {
         */
 
         var fields = req.query.fields;
+        var field;
 
         var personNames = [];
         var placeNames = [];
         var shotAtDate = undefined;
 
-        var field;
-        fields.forEach(function(fieldString) {
-            field = JSON.parse(fieldString);
+        // one filter
+        if (typeof fields == 'string') {
+            field = JSON.parse(fields);
             switch (field.model.attr) {
                 case 'personName':
                     personNames.push(field.search);
@@ -35,13 +36,50 @@ module.exports = function(app) {
                     shotAtDate = new Date(field.shotAt);
                     break;
             }
+
+        // more than one filter
+        } else if (typeof fields == 'object') {
+            fields.forEach(function(fieldString) {
+                field = JSON.parse(fieldString);
+                switch (field.model.attr) {
+                    case 'personName':
+                        personNames.push(field.search);
+                        break;
+                    case 'placeName':
+                        placeNames.push(field.search);
+                        break;
+                    case 'shotAtDate':
+                        shotAtDate = new Date(field.shotAt);
+                        break;
+                }
+            });
+
+        } else {
+            console.error('Could not read fields.');
+        }
+
+        models.Image.findAll({
+            include: [
+                {
+                    model: models.Place,
+                    where: {
+                        name: {
+                            $in: placeNames
+                        }
+                    }
+                }
+            ]
+        }).then(function(images) {
+            images.forEach(function(image) {
+                console.log(image.name);
+            });
+
+            res.json({result: images});
         });
 
 //        imageService.findWherePersonNamesIn(personNames);
 //        imageService.findWherePlaceNamesIn(placeNames);
 //        imageService.findWhereShotAtDateEquals(shotAtDate);
-
-        res.json({success: true});
     });
 
 };
