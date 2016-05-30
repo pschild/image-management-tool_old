@@ -21,6 +21,7 @@ require('./routes/persons')(app);
 require('./routes/links')(app);
 require('./routes/tags')(app);
 require('./routes/fileSystem')(app);
+require('./routes/search')(app);
 
 app.get('*', function (req, res) {
     res.sendfile('./public/views/index.html');
