@@ -12,9 +12,8 @@
         </div>
     </div>
     <div class="folder-tile col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-repeat="folderName in folderNames">
-        <div class="folder-tile-inner">
+        <div class="folder-tile-inner" context-menu="folderContextMenu">
             <a ng-href="#{{currentUrl}}/{{folderName | encodeURIComponent}}">{{folderName}}</a>
-            <button class="btn btn-danger" ng-click="deleteFolder(folderName)"><i class="glyphicon glyphicon-trash"></i> Ordner löschen</button>
         </div>
     </div>
     <div ng-show="showNewDirectory" class="folder-tile col-lg-2 col-md-3 col-sm-4 col-xs-6">

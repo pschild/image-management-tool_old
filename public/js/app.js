@@ -1,4 +1,4 @@
-var imt = angular.module('imt', ['ui.router', 'ngTagsInput', 'ui.bootstrap']);
+var imt = angular.module('imt', ['ui.router', 'ngTagsInput', 'ui.bootstrap', 'ui.bootstrap.contextMenu']);
 
 imt.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/files/');

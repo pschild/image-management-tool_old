@@ -13,6 +13,7 @@
     "angular-i18n": "^1.5.5",
     "alertify-js": "^1.6.1",
     "awesome-bootstrap-checkbox": "^0.3.7",
-    "font-awesome": "^4.6.3"
+    "font-awesome": "^4.6.3",
+    "angular-bootstrap-contextmenu": "^0.9.7"
   }
 }

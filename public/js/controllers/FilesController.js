@@ -15,6 +15,12 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
     $scope.newDirectoryName = '';
     $scope.showNewDirectory = false;
 
+    $scope.folderContextMenu = [
+        ['Löschen', function ($itemScope) {
+            $scope.deleteFolder($itemScope.folderName);
+        }]
+    ];
+
     this.getFoldersAndImages = function() {
         FolderStructureService.get($scope.currentFolderPath).then(
             function(response) {
