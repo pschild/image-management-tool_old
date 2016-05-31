@@ -1,4 +1,4 @@
-var all = require('promised-io/promise').all;
+var _ = require('underscore');
 
 var models = require('../models');
 var imageService = require('../services/imageService');
@@ -15,16 +15,16 @@ module.exports = function(app) {
          ]
         */
 
-        var fields = req.query.fields;
-        var field;
+        // ensure that we have an array of fields, even if only one field is given:
+        var fields = typeof req.query.fields == 'string' ? [req.query.fields] : req.query.fields;
 
         var personNames = [];
         var placeNames = [];
         var shotAtDate = undefined;
 
-        // one filter
-        if (typeof fields == 'string') {
-            field = JSON.parse(fields);
+        var field;
+        fields.forEach(function(fieldString) {
+            field = JSON.parse(fieldString);
             switch (field.model.attr) {
                 case 'personName':
                     personNames.push(field.search);
@@ -36,50 +36,98 @@ module.exports = function(app) {
                     shotAtDate = new Date(field.shotAt);
                     break;
             }
-
-        // more than one filter
-        } else if (typeof fields == 'object') {
-            fields.forEach(function(fieldString) {
-                field = JSON.parse(fieldString);
-                switch (field.model.attr) {
-                    case 'personName':
-                        personNames.push(field.search);
-                        break;
-                    case 'placeName':
-                        placeNames.push(field.search);
-                        break;
-                    case 'shotAtDate':
-                        shotAtDate = new Date(field.shotAt);
-                        break;
-                }
-            });
-
-        } else {
-            console.error('Could not read fields.');
-        }
-
-        models.Image.findAll({
-            include: [
-                {
-                    model: models.Place,
-                    where: {
-                        name: {
-                            $in: placeNames
-                        }
-                    }
-                }
-            ]
-        }).then(function(images) {
-            images.forEach(function(image) {
-                console.log(image.name);
-            });
-
-            res.json({result: images});
         });
 
-//        imageService.findWherePersonNamesIn(personNames);
-//        imageService.findWherePlaceNamesIn(placeNames);
-//        imageService.findWhereShotAtDateEquals(shotAtDate);
+        models.Image.findAll({include: [models.Place, models.Tag, models.Person]})
+            .then(function(images) {
+                var resultImages = images;
+
+                resultImages = findWherePlaceAttrsIn(resultImages, placeNames);
+                resultImages = findWherePersonAttrsIn(resultImages, personNames);
+                resultImages = findWhereShotAtDateEquals(resultImages, shotAtDate);
+
+                res.json({result: resultImages});
+            });
     });
+
+    var findWherePlaceAttrsIn = function(images, criteria) {
+        // if we have no criteria given, return the images as they are:
+        if (!criteria || criteria.length == 0) {
+            return images;
+        }
+
+        return _.filter(images, function(image) {
+            // don't return images that don't have the property set:
+            if (!image.Place) {
+                return false;
+            }
+
+            var result = false;
+            var regex;
+
+            // OR-logic, case INsensitive
+            criteria.forEach(function(criterion) {
+                regex = new RegExp(criterion, 'i')
+                if (
+                    image.Place.name.search(regex) >= 0
+                    || image.Place.address.search(regex) >= 0
+                    || image.Place.country.search(regex) >= 0
+                ) {
+                    result = true;
+                }
+            });
+
+            return result;
+        });
+    };
+
+    var findWherePersonAttrsIn = function(images, criteria) {
+        // if we have no criteria given, return the images as they are:
+        if (!criteria || criteria.length == 0) {
+            return images;
+        }
+
+        return _.filter(images, function(image) {
+            // don't return images that don't have the property set:
+            if (!image.People || image.People.length == 0) {
+                return false;
+            }
+
+            var result = false;
+            var regex;
+
+            // OR-logic, case INsensitive
+            image.People.forEach(function(person) {
+                criteria.forEach(function(criterion) {
+                    regex = new RegExp(criterion, 'i');
+                    if (
+                        person.name.search(regex) >= 0
+                    ) {
+                        result = true;
+                    }
+                });
+            });
+
+            return result;
+        });
+    };
+
+    var findWhereShotAtDateEquals = function(images, shotAtDate) {
+        // if we have no criteria given, return the images as they are:
+        if (!shotAtDate) {
+            return images;
+        }
+
+        return _.filter(images, function(image) {
+            // don't return images that don't have the property set:
+            if (!image.shotAt) {
+                return false;
+            }
+
+            return image.shotAt.getDate() == shotAtDate.getDate()
+                && image.shotAt.getMonth() == shotAtDate.getMonth()
+                && image.shotAt.getFullYear() == shotAtDate.getFullYear();
+        });
+    };
 
 };

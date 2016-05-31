@@ -44,7 +44,7 @@ imt.directive('searchForm', function($compile, $http) {
                         }
                     })
                     .then(function(response) {
-                        scope.results = response.data;
+                        scope.results = response.data.result;
                     });
             };
         }

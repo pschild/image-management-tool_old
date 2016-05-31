@@ -8,14 +8,8 @@
 
 <br><br>
 
-<div ng-show="results.length == 0">
-    Es wurden keine Bilder gefunden.
-</div>
+<div>
+    <div ng-pluralize count="results.length" when="{'0': 'Keine Bilder gefunden', 'one': '1 Ergebnis', 'other': '{} Ergebnisse'}"></div>
 
-<div ng-show="results.length > 0">
-    <div>{{results.length}} Ergebnisse</div>
-
-    <div>
-        <img ng-repeat="image in results" src="./{{image.path}}/{{image.name}}.{{image.suffix}}" width="{{100 / results.length}}%" />
-    </div>
+    <gallery images="results"></gallery>
 </div>
