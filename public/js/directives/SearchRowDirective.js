@@ -18,6 +18,7 @@ imt.directive('searchRow', function() {
             scope.models = [
                 {name: 'Person', attr: 'personName', type: 'text'},
                 {name: 'Ort', attr: 'placeName', type: 'text'},
+                {name: 'Tag', attr: 'tagName', type: 'text'},
                 {name: 'Aufnahmedatum', attr: 'shotAtDate', type: 'date'}
             ];
 
