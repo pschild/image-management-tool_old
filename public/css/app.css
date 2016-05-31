@@ -12,6 +12,18 @@ h2 {
     margin-top: 5px;
 }
 
+/* --------------------------------------------------------------------- OVERWRITES --------------------------------------------------------------------- */
+/* remove blue border around datepicker */
+.uib-datepicker > table {
+    outline: 0;
+}
+
+/* add padding left and right for datepicker */
+.dropdown-menu {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 /* --------------------------------------------------------------------- NAVIGATION --------------------------------------------------------------------- */
 #navigation {
     list-style: none;
