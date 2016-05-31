@@ -21,6 +21,12 @@ imt.controller('FilesController', function ($scope, $location, $stateParams, Fol
         }]
     ];
 
+    $scope.folderAreaContextMenu = [
+        ['Neu', function ($itemScope) {
+            $scope.showNewDirectory = true;
+        }]
+    ];
+
     this.getFoldersAndImages = function() {
         FolderStructureService.get($scope.currentFolderPath).then(
             function(response) {
