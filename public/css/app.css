@@ -67,14 +67,15 @@ h2 {
     height: 90%;
     width: 100%;
 
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: 50%;
 }
 
 .image-tile .checkbox {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: -20px;
+    right: 0;
 }
 
 /* --------------------------------------------------------------------- IMAGE --------------------------------------------------------------------- */
