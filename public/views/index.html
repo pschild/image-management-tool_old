@@ -44,6 +44,7 @@
     <script src="js/controllers/SearchController.js"></script>
     <script src="js/controllers/FilesController.js"></script>
 
+    <script src="js/directives/NavigationDirective.js"></script>
     <script src="js/directives/ImageUploadDirective.js"></script>
     <script src="js/directives/ImageMarkerDirective.js"></script>
     <script src="js/directives/ManagementAreaDirective.js"></script>
@@ -63,19 +64,9 @@
     <script src="js/services/FolderStructureService.js"></script>
     <script src="js/services/AlertifyService.js"></script>
 </head>
-<body ng-app="imt" class="container-fluid">
-    <ul id="navigation">
-        <li>
-            <a href="/#/files">Bilder</a>
-        </li>
-        <li>
-            <a href="/#/management">Verwaltung</a>
-        </li>
-        <li>
-            <a href="/#/search">Suche</a>
-        </li>
-    </ul>
+<body ng-app="imt">
+    <navigation></navigation>
 
-    <div style="clear: left;" ui-view></div>
+    <div class="container-fluid" style="clear: left;" ui-view></div>
 </body>
 </html>

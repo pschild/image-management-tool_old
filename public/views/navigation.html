@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" ng-href="{{brandItem.url}}">{{ brandItem.label }}</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-class="{ active: isCurrentPath(item.url) }" ng-repeat="item in mainItems">
+                    <a ng-href="{{item.url}}">{{ item.label }}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{ active: isCurrentPath(item.url) }" ng-repeat="item in secondaryItems">
+                    <a ng-href="{{item.url}}">{{ item.label }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
