@@ -4,6 +4,18 @@ var imageService = require('../services/imageService');
 module.exports = function(app) {
 
     app.get('/api/test', function (req, res) {
+        models.Image.findAll({
+            include: [
+                { model: models.Place, where: { name: { $like: '%uis%' } } },
+                { model: models.Tag, where: { name: { $like: '%int%' } } },
+                { model: models.Person, where: { name: { $like: '%udit%' } } }
+            ]
+        }).then(function(images) {
+            res.json({images: images});
+        });
+
+        return;
+
         models.Image.findById(11/*, { include: [models.Place] }*/).then(function(image) {
             // pass the place id directly to the setter ...
             /*image.setPlace(3);
