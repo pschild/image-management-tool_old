@@ -1,8 +1,9 @@
-<form class="form-horizontal container">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Name</label>
+<form name="form" class="form-horizontal container" novalidate>
+    <div class="form-group" ng-class="{'has-error': form.name.$invalid && !form.name.$pristine}">
+        <label class="col-sm-2 control-label">Name *</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" ng-model="item.name" />
+            <input type="text" name="name" class="form-control" ng-model="item.name" required />
+            <span class="help-block" ng-show="form.name.$error.required && !form.name.$pristine">Bitte geben Sie einen Namen ein.</span>
         </div>
     </div>
     <div class="form-group">
@@ -20,6 +21,6 @@
 
     <div class="button-row pull-right">
         <button class="btn btn-danger" ng-click="cancelEdit()"><i class="glyphicon glyphicon-remove"></i> Abbrechen</button>
-        <button class="btn btn-success" ng-click="saveItem()"><i class="glyphicon glyphicon-floppy-disk"></i> Speichern</button>
+        <button class="btn btn-success" ng-click="saveItem()" ng-disabled="form.$invalid"><i class="glyphicon glyphicon-floppy-disk"></i> Speichern</button>
     </div>
 </form>
