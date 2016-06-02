@@ -1,5 +1,5 @@
 <div>
-    <h3>{{$ctrl.title}}</h3>
+    <h3>{{title}}</h3>
 
-    <search-row-1 model="$ctrl.model"></search-row-1>
+    <search-row model="model" on-add-row="addRow()" on-remove-row="removeRow(uuid)" on-change="onChange(formData)"></search-row>
 </div>

@@ -1,36 +1,36 @@
-<div class="form-group">
-    <div class="col-sm-1 search-label">
-        <span class="and-label">UND</span>
-    </div>
+<div class="form-group row">
     <div class="col-sm-2">
-        <select class="form-control" ng-model="data.model" ng-options="model.name for model in models"></select>
+        <select class="form-control" ng-model="formData.operation" ng-options="operation for operation in operations"></select>
     </div>
-    <div class="col-sm-1 search-label search-equals-label">
-        <span>enthält</span>
+    <div class="col-sm-3">
+        <select class="form-control" ng-model="formData.field" ng-options="field.name for field in model.fields"></select>
     </div>
+    <div class="col-sm-1">
+        enthält
+    </div>
+    <div class="col-sm-4">
+        <div ng-if="formData.field.type == 'text'">
+            <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff" />
+        </div>
 
-    <div class="col-sm-6" ng-if="data.model.type == 'text'">
-        <input type="text" placeholder="Suchbegriff" ng-model="data.search" class="form-control">
-    </div>
-
-    <div class="col-sm-6" ng-if="data.model.type == 'date'">
-        <p class="input-group">
-            <input type="text"
-                   class="form-control"
-                   uib-datepicker-popup="dd.MM.yyyy"
-                   is-open="calendarOpen"
-                   ng-model="data.shotAt"
-                   show-button-bar="false" />
+        <div ng-if="formData.field.type == 'date'">
+            <p class="input-group">
+                <input type="text"
+                       class="form-control"
+                       uib-datepicker-popup="dd.MM.yyyy"
+                       is-open="calendarOpen"
+                       ng-model="formData.date"
+                       show-button-bar="false" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="calendarOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
-        </p>
-    </div>
-
-    <div class="col-sm-1">
-        <button class="btn btn-block btn-danger remove-row-button" ng-click="removeRow()"><i class="glyphicon glyphicon-trash"></i></button>
+            </p>
+        </div>
     </div>
     <div class="col-sm-1">
-        <button class="btn btn-block btn-default add-row-button" ng-click="addRow()"><i class="glyphicon glyphicon-plus"></i></button>
+        <button class="btn btn-block btn-default" ng-click="addRow()"><i class="glyphicon glyphicon-plus"></i></button>
+    </div>
+    <div class="col-sm-1">
+        <button class="btn btn-block btn-danger" ng-click="removeRow()"><i class="glyphicon glyphicon-trash"></i></button>
     </div>
 </div>
