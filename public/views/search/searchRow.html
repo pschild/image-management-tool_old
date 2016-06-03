@@ -1,25 +1,38 @@
 <div class="form-group row">
-    <div class="col-sm-2">
-        <select class="form-control" ng-model="formData.operation" ng-options="operation for operation in operations"></select>
-    </div>
-    <div class="col-sm-3">
-        <select class="form-control" ng-model="formData.field" ng-options="field.name for field in model.fields"></select>
-    </div>
     <div class="col-sm-1">
-        enthält
+        und
     </div>
-    <div class="col-sm-4">
-        <div ng-if="formData.field.type == 'text'">
-            <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff" />
-        </div>
 
-        <div ng-if="formData.field.type == 'date'">
+    <div class="col-sm-3">
+        <select class="form-control" ng-model="formData.field" ng-options="field.description for field in model.fields"></select>
+    </div>
+
+    <!-- text -->
+    <div ng-if="formData.field.type == 'text'">
+        <div class="col-sm-2">
+            enthält
+        </div>
+        <div class="col-sm-4">
+            <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff" />
+            <div class="radio-inline radio radio-primary" ng-repeat="operation in operations" ng-show="formData.text.indexOf(',') >= 0">
+                <input type="radio" id="{{$id}}" ng-model="formData.operation" value="{{operation.type}}">
+                <label for="{{$id}}">{{operation.description}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- date -->
+    <div ng-if="formData.field.type == 'date'">
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="formData.date.compareMethod" ng-options="compareMethod.description for compareMethod in compareMethods"></select>
+        </div>
+        <div class="col-sm-4">
             <p class="input-group">
                 <input type="text"
                        class="form-control"
                        uib-datepicker-popup="dd.MM.yyyy"
                        is-open="calendarOpen"
-                       ng-model="formData.date"
+                       ng-model="formData.date.value"
                        show-button-bar="false" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="calendarOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -27,6 +40,8 @@
             </p>
         </div>
     </div>
+
+
     <div class="col-sm-1">
         <button class="btn btn-block btn-default" ng-click="addRow()"><i class="glyphicon glyphicon-plus"></i></button>
     </div>

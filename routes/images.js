@@ -4,11 +4,62 @@ var imageService = require('../services/imageService');
 module.exports = function(app) {
 
     app.get('/api/test', function (req, res) {
+//        models.Image.findAll({
+//            include: [
+//                { model: models.Place, where: { name: { $like: '%uis%' } } },
+//                { model: models.Tag, where: { name: { $like: '%int%' } } },
+//                { model: models.Person, where: { name: { $like: '%udit%' } } }
+//            ]
+//        }).then(function(images) {
+//            res.json({images: images});
+//        });
+
         models.Image.findAll({
+//            where: {
+//                shotAt: {
+//                    $like: '%2015'
+//                }
+//            },
             include: [
-                { model: models.Place, where: { name: { $like: '%uis%' } } },
-                { model: models.Tag, where: { name: { $like: '%int%' } } },
-                { model: models.Person, where: { name: { $like: '%udit%' } } }
+                {
+                    model: models.Place,
+                    where: {
+                        name: {
+                            $or: [
+                                { $like: '%Kleve%' },
+                                { $like: '%Schneppenbaum%' }
+                            ]
+                        },
+                        address: {
+                            $and: [
+                                { $like: '%xxx%' },
+                                { $like: '%yyy%' }
+                            ]
+                        }
+                    }
+                },
+                {
+                    model: models.Tag,
+                    where: {
+                        name: {
+                            $and: [
+                                { $like: '%Geburtstag%' },
+                                { $like: '%Sommer%' }
+                            ]
+                        }
+                    }
+                },
+                {
+                    model: models.Person,
+                    where: {
+                        name: {
+                            $or: [
+                                { $like: '%Fynn%' },
+                                { $like: '%Milla%' }
+                            ]
+                        }
+                    }
+                }
             ]
         }).then(function(images) {
             res.json({images: images});

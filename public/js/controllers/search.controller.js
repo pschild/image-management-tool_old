@@ -1,22 +1,22 @@
 imt.controller('SearchController', function ($scope, $http) {
-    $scope.areas = [];
+    $scope.areas = {};
     $scope.results = [];
 
     $scope.models = {
         image: {
             name: 'image',
             fields: [
-                { name: 'name', type: 'text' },
-                { name: 'comment', type: 'text' },
-                { name: 'shotAt', type: 'date' },
-                { name: 'createdAt', type: 'date' }
+                { description: 'Name', name: 'name', type: 'text' },
+                { description: 'Kommentar', name: 'comment', type: 'text' },
+                { description: 'Aufnahmedatum', name: 'shotAt', type: 'date' },
+                { description: 'Erstellungsdatum', name: 'createdAt', type: 'date' }
             ]
         },
         person: {
             name: 'person',
             fields: [
-                { name: 'name', type: 'text' },
-                { name: 'birthday', type: 'date' }
+                { description: 'Name', name: 'name', type: 'text' },
+                { description: 'Geburtstag', name: 'birthday', type: 'date' }
             ]
         }
     };
@@ -26,10 +26,9 @@ imt.controller('SearchController', function ($scope, $http) {
     };
 
     $scope.startSearch = function() {
-        console.log($scope.areas);
         $http.get('/api/search', {
                 params: {
-                    fields: 1
+                    areas: $scope.areas
                 }
             })
             .then(function(response) {

@@ -6,59 +6,127 @@ var imageService = require('../services/imageService');
 module.exports = function(app) {
 
     app.get('/api/search', function (req, res) {
-        //console.log(req.query.fields);
-        /* EXAMPLE FIELDS:
-         [
-             '{"uuid":"search-row-1","model":{"name":"Person","attr":"personName","type":"text"},"search":"philippe","shotAt":"2016-05-30T14:11:12.856Z"}',
-             '{"uuid":"search-row-2","model":{"name":"Ort","attr":"placeName","type":"text"},"search":"kleve","shotAt":"2016-05-30T14:11:20.036Z"}',
-             '{"uuid":"search-row-3","model":{"name":"Aufnahmedatum","attr":"shotAtDate","type":"date"},"search":"","shotAt":"2016-05-04T14:11:23.927Z"}'
-         ]
-        */
+        var areaKeys = JSON.parse(req.query.areas);
+        var area;
+        var fieldType, fieldName, text, textParts, operation, date, dateCompareMethod;
 
-        // ensure that we have an array of fields, even if only one field is given:
-        var fields = typeof req.query.fields == 'string' ? [req.query.fields] : req.query.fields;
+        var sql = {};
 
-        var personNames = [];
-        var placeNames = [];
-        var tagNames = [];
-        var shotAtDate = undefined;
+        // for each area:
+        Object.keys(areaKeys).forEach(function(areaKey) {
+            area = areaKeys[areaKey];
+            if (area) {
+                // for each field in an area:
+                area.forEach(function(field) {
+                    fieldType = field.field.type; // 'text' || 'date'
+                    fieldName = field.field.name; // column name
 
-        var field;
-        fields.forEach(function(fieldString) {
-            field = JSON.parse(fieldString);
-            switch (field.model.attr) {
-                case 'personName':
-                    if (field.search != '') {
-                        personNames.push(field.search);
+                    if (fieldType == 'text') {
+                        text = field.text;
+                        textParts = text.split(',');
+                        operation = field.operation; // 'and' || 'or'
+
+                        sql[areaKey] = sql[areaKey] || {};
+                        sql[areaKey].where = sql[areaKey].where || {};
+                        sql[areaKey].where[fieldName] = sql[areaKey].where[fieldName] || {};
+
+                        if (operation == 'and') {
+                            if (!sql[areaKey].where[fieldName]['$and']) {
+                                sql[areaKey].where[fieldName]['$and'] = [];
+                            }
+
+                            textParts.forEach(function(textPart) {
+                                sql[areaKey].where[fieldName]['$and'].push({ $like: '%' + textPart + '%' });
+                            });
+                        } else if (operation == 'or') {
+                            if (!sql[areaKey].where[fieldName]['$or']) {
+                                sql[areaKey].where[fieldName]['$or'] = [];
+                            }
+
+                            textParts.forEach(function(textPart) {
+                                sql[areaKey].where[fieldName]['$or'].push({ $like: '%' + textPart + '%' });
+                            });
+                        }
+
+                    } else if (fieldType == 'date') {
+                        date = new Date(field.date.value);
+                        dateCompareMethod = field.date.compareMethod.type; // 'equals' || 'before' || 'after'
+
+                        sql[areaKey] = sql[areaKey] || {};
+                        sql[areaKey].where = sql[areaKey].where || {};
+                        sql[areaKey].where[fieldName] = sql[areaKey].where[fieldName] || {};
+
+                        switch (dateCompareMethod) {
+                            case 'equals':
+                                sql[areaKey].where[fieldName] = date;
+                                break;
+                            case 'before':
+                                sql[areaKey].where[fieldName]['$lt'] = date;
+                                break;
+                            case 'after':
+                                sql[areaKey].where[fieldName]['$gt'] = date;
+                                break;
+                        }
                     }
-                    break;
-                case 'placeName':
-                    if (field.search != '') {
-                        placeNames.push(field.search);
-                    }
-                    break;
-                case 'tagName':
-                    if (field.search != '') {
-                        tagNames.push(field.search);
-                    }
-                    break;
-                case 'shotAtDate':
-                    shotAtDate = new Date(field.shotAt);
-                    break;
+                });
             }
         });
 
-        models.Image.findAll({include: [models.Place, models.Tag, models.Person]})
-            .then(function(images) {
-                var resultImages = images;
+        models.Image.findAll({
+            where: sql.image.where,
+            include: [
+                {
+                    model: models.Person,
+                    where: sql.person.where
+                }
+            ]
+        }).then(function(images) {
+            res.json({result: images});
+        });
 
-                resultImages = findWherePlaceAttrsIn(resultImages, placeNames);
-                resultImages = findWherePersonAttrsIn(resultImages, personNames);
-                resultImages = findWhereTagAttrsIn(resultImages, tagNames);
-                resultImages = findWhereShotAtDateEquals(resultImages, shotAtDate);
-
-                res.json({result: resultImages});
-            });
+//        var fields = typeof req.query.fields == 'string' ? [req.query.fields] : req.query.fields;
+//
+//        var personNames = [];
+//        var placeNames = [];
+//        var tagNames = [];
+//        var shotAtDate = undefined;
+//
+//        var field;
+//        fields.forEach(function(fieldString) {
+//            field = JSON.parse(fieldString);
+//            switch (field.model.attr) {
+//                case 'personName':
+//                    if (field.search != '') {
+//                        personNames.push(field.search);
+//                    }
+//                    break;
+//                case 'placeName':
+//                    if (field.search != '') {
+//                        placeNames.push(field.search);
+//                    }
+//                    break;
+//                case 'tagName':
+//                    if (field.search != '') {
+//                        tagNames.push(field.search);
+//                    }
+//                    break;
+//                case 'shotAtDate':
+//                    shotAtDate = new Date(field.shotAt);
+//                    break;
+//            }
+//        });
+//
+//        models.Image.findAll({include: [models.Place, models.Tag, models.Person]})
+//            .then(function(images) {
+//                var resultImages = images;
+//
+//                resultImages = findWherePlaceAttrsIn(resultImages, placeNames);
+//                resultImages = findWherePersonAttrsIn(resultImages, personNames);
+//                resultImages = findWhereTagAttrsIn(resultImages, tagNames);
+//                resultImages = findWhereShotAtDateEquals(resultImages, shotAtDate);
+//
+//                res.json({result: resultImages});
+//            });
     });
 
     var findWherePlaceAttrsIn = function(images, criteria) {
