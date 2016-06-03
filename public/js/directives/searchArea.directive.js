@@ -10,8 +10,8 @@ imt.directive('searchArea', function($compile) {
             scope.rows = [];
 
             scope.addRow = function() {
-                $compile('<search-row model="model" on-row-add="addRow()" on-row-remove="removeRow(uuid)" on-row-change="onRowChange(formData)"></search-row>')(scope).insertAfter($element.find('search-row').last());
-                scope.updateRowButtons();
+                var $insertAfterElement = $element.find('search-row').last().length > 0 ? $element.find('search-row').last() : $element.find('.row');
+                $compile('<search-row model="model" on-row-add="addRow()" on-row-remove="removeRow(uuid)" on-row-change="onRowChange(formData)"></search-row>')(scope).insertAfter($insertAfterElement);
 
                 scope.onAreaChange({
                     model: scope.model,
@@ -23,7 +23,6 @@ imt.directive('searchArea', function($compile) {
                 scope.rows = scope.rows.filter(function(row) {
                     return row.uuid != uuid;
                 });
-                scope.updateRowButtons();
 
                 scope.onAreaChange({
                     model: scope.model,
@@ -48,11 +47,6 @@ imt.directive('searchArea', function($compile) {
                     model: scope.model,
                     areaRows: scope.rows
                 });
-            };
-
-            scope.updateRowButtons = function() {
-                $element.find('search-row:first-of-type .remove-row-button').hide();
-                $element.find('search-row:last-of-type .add-row-button').show();
             };
         }
     }

@@ -2,7 +2,7 @@ body {
     margin-bottom: 20px;
 }
 
-h2 {
+h2, h3 {
     margin: 0;
     margin-bottom: 20px;
     display: inline-block;
@@ -154,12 +154,16 @@ h2 {
 }
 
 /* --------------------------------------------------------------------- SEARCH --------------------------------------------------------------------- */
-.search-label {
+.search-area {
+    margin-bottom: 50px;
+}
+
+.connection-label-container {
     font-size: 18px;
     font-style: italic;
     line-height: 34px;
 }
 
-.search-equals-label {
-    text-align: center;
+.contains-label {
+    line-height: 34px;
 }

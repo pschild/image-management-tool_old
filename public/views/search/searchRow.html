@@ -1,6 +1,6 @@
 <div class="form-group row">
-    <div class="col-sm-1">
-        und
+    <div class="col-sm-1 connection-label-container">
+        <span class="connection-label">und</span>
     </div>
 
     <div class="col-sm-3">
@@ -9,11 +9,11 @@
 
     <!-- text -->
     <div ng-if="formData.field.type == 'text'">
-        <div class="col-sm-2">
+        <div class="col-sm-2 contains-label">
             enthält
         </div>
-        <div class="col-sm-4">
-            <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff" />
+        <div class="col-sm-5">
+            <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff(e)" />
             <div class="radio-inline radio radio-primary" ng-repeat="operation in operations" ng-show="formData.text.indexOf(',') >= 0">
                 <input type="radio" id="{{$id}}" ng-model="formData.operation" value="{{operation.type}}">
                 <label for="{{$id}}">{{operation.description}}</label>
@@ -26,10 +26,11 @@
         <div class="col-sm-2">
             <select class="form-control" ng-model="formData.date.compareMethod" ng-options="compareMethod.description for compareMethod in compareMethods"></select>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <p class="input-group">
                 <input type="text"
                        class="form-control"
+                       placeholder="z. B. 03.01.2003"
                        uib-datepicker-popup="dd.MM.yyyy"
                        is-open="calendarOpen"
                        ng-model="formData.date.value"
@@ -41,11 +42,7 @@
         </div>
     </div>
 
-
     <div class="col-sm-1">
-        <button class="btn btn-block btn-default" ng-click="addRow()"><i class="glyphicon glyphicon-plus"></i></button>
-    </div>
-    <div class="col-sm-1">
-        <button class="btn btn-block btn-danger" ng-click="removeRow()"><i class="glyphicon glyphicon-trash"></i></button>
+        <button class="btn btn-block btn-danger" ng-click="removeRow()"><i class="glyphicon glyphicon-minus"></i></button>
     </div>
 </div>

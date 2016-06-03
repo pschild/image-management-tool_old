@@ -2,12 +2,15 @@ imt.directive('searchRow', function() {
     return {
         scope: {
             model: '=',
-            onRowAdd: '&',
             onRowRemove: '&',
             onRowChange: '&'
         },
         templateUrl: 'views/search/searchRow.html',
         link: function(scope, $element, $attrs) {
+            if ($element.is(':first-of-type')) {
+                $element.find('.connection-label').hide();
+            }
+
             scope.uuid = _.uniqueId('search-row-');
 
             scope.operations = [
@@ -32,11 +35,6 @@ imt.directive('searchRow', function() {
                     compareMethod: scope.compareMethods[0],
                     value: null
                 }
-            };
-
-            scope.addRow = function() {
-                $element.find('.add-row-button').hide();
-                scope.onRowAdd();
             };
 
             scope.removeRow = function(uuid) {
