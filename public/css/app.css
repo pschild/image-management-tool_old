@@ -12,6 +12,10 @@ h2, h3 {
     margin-top: 5px;
 }
 
+.info-icon {
+    cursor: pointer;
+}
+
 /* --------------------------------------------------------------------- OVERWRITES --------------------------------------------------------------------- */
 /* remove blue border around datepicker */
 .uib-datepicker > table {

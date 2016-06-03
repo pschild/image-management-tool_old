@@ -10,7 +10,7 @@
     <!-- text -->
     <div ng-if="formData.field.type == 'text'">
         <div class="col-sm-2 contains-label">
-            enthält
+            enthält <i class="glyphicon glyphicon-info-sign info-icon" uib-tooltip="Es wird geprüft, ob das jeweilige Feld den/die eingegebenen Suchbegriff(e) enthält (keine genau Übereinstimmung)"></i>
         </div>
         <div class="col-sm-5">
             <input type="text" ng-model="formData.text" class="form-control" placeholder="Suchbegriff(e)" />
