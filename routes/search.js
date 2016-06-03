@@ -73,11 +73,11 @@ module.exports = function(app) {
         });
 
         models.Image.findAll({
-            where: sql.image.where,
+            where: sql.image ? sql.image.where : {},
             include: [
                 {
                     model: models.Person,
-                    where: sql.person.where
+                    where: sql.person ? sql.person.where : {}
                 }
             ]
         }).then(function(images) {
