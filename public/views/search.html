@@ -11,7 +11,7 @@
     <button class="btn btn-success pull-right" ng-click="startSearch()"><i class="fa fa-search"></i> Suche starten</button>
 </div>
 
-<div>
+<div class="result-container">
     <div ng-pluralize count="results.length" when="{'0': 'Keine Bilder gefunden', 'one': '1 Ergebnis', 'other': '{} Ergebnisse'}"></div>
 
     <gallery images="results"></gallery>
