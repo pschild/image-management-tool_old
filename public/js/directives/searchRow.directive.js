@@ -2,9 +2,9 @@ imt.directive('searchRow', function() {
     return {
         scope: {
             model: '=',
-            onAddRow: '&',
-            onRemoveRow: '&',
-            onChange: '&'
+            onRowAdd: '&',
+            onRowRemove: '&',
+            onRowChange: '&'
         },
         templateUrl: 'views/search/searchRow.html',
         link: function(scope, $element, $attrs) {
@@ -23,18 +23,18 @@ imt.directive('searchRow', function() {
 
             scope.addRow = function() {
                 $element.find('.add-row-button').hide();
-                scope.onAddRow();
+                scope.onRowAdd();
             };
 
             scope.removeRow = function(uuid) {
                 $element.remove();
-                scope.onRemoveRow({
+                scope.onRowRemove({
                     uuid: scope.uuid
                 });
             };
 
             scope.$watchCollection('formData', function() {
-                scope.onChange({ formData: scope.formData });
+                scope.onRowChange({ formData: scope.formData });
             });
         }
     }

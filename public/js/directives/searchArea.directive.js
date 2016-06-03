@@ -3,17 +3,17 @@ imt.directive('searchArea', function($compile) {
         scope: {
             title: '@',
             model: '=',
-            handleAreaUpdate: '&'
+            onAreaChange: '&'
         },
         templateUrl: 'views/search/searchArea.html',
         link: function(scope, $element, $attrs) {
             scope.rows = [];
 
             scope.addRow = function() {
-                $compile('<search-row model="model" on-add-row="addRow()" on-remove-row="removeRow(uuid)" on-change="onChange(formData)"></search-row>')(scope).insertAfter($element.find('search-row').last());
+                $compile('<search-row model="model" on-row-add="addRow()" on-row-remove="removeRow(uuid)" on-row-change="onRowChange(formData)"></search-row>')(scope).insertAfter($element.find('search-row').last());
                 scope.updateRowButtons();
 
-                scope.handleAreaUpdate({
+                scope.onAreaChange({
                     model: scope.model,
                     areaRows: scope.rows
                 });
@@ -25,13 +25,13 @@ imt.directive('searchArea', function($compile) {
                 });
                 scope.updateRowButtons();
 
-                scope.handleAreaUpdate({
+                scope.onAreaChange({
                     model: scope.model,
                     areaRows: scope.rows
                 });
             };
 
-            scope.onChange = function(formData) {
+            scope.onRowChange = function(formData) {
                 var found = false;
 
                 scope.rows.forEach(function(row) {
@@ -44,7 +44,7 @@ imt.directive('searchArea', function($compile) {
                     scope.rows.push(formData);
                 }
 
-                scope.handleAreaUpdate({
+                scope.onAreaChange({
                     model: scope.model,
                     areaRows: scope.rows
                 });

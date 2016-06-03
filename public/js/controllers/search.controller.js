@@ -1,5 +1,5 @@
 imt.controller('SearchController', function ($scope, $http) {
-    $scope.rows = [];
+    $scope.areas = [];
     $scope.results = [];
 
     $scope.models = {
@@ -21,12 +21,12 @@ imt.controller('SearchController', function ($scope, $http) {
         }
     };
     
-    $scope.handleAreaUpdate = function(model, areaRows) {
-        $scope.rows[model.name] = areaRows;
+    $scope.onAreaChange = function(model, areaRows) {
+        $scope.areas[model.name] = areaRows;
     };
 
     $scope.startSearch = function() {
-        console.log($scope.rows);
+        console.log($scope.areas);
         $http.get('/api/search', {
                 params: {
                     fields: 1

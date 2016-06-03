@@ -1,7 +1,7 @@
 <h2>Bilder suchen</h2>
 
-<search-area title="Bilder" model="models.image" handle-area-update="handleAreaUpdate(model, areaRows)"></search-area>
-<search-area title="Personen" model="models.person" handle-area-update="handleAreaUpdate(model, areaRows)"></search-area>
+<search-area title="Bilder" model="models.image" on-area-change="onAreaChange(model, areaRows)"></search-area>
+<search-area title="Personen" model="models.person" on-area-change="onAreaChange(model, areaRows)"></search-area>
 
 <div class="button-row">
     <button class="btn btn-success pull-right" ng-click="startSearch()"><i class="fa fa-search"></i> Suche starten</button>
