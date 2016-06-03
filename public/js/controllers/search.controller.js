@@ -18,6 +18,20 @@ imt.controller('SearchController', function ($scope, $http) {
                 { description: 'Name', name: 'name', type: 'text' },
                 { description: 'Geburtstag', name: 'birthday', type: 'date' }
             ]
+        },
+        place: {
+            name: 'place',
+            fields: [
+                { description: 'Name', name: 'name', type: 'text' },
+                { description: 'Adresse', name: 'address', type: 'text' },
+                { description: 'Land', name: 'country', type: 'text' }
+            ]
+        },
+        tag: {
+            name: 'tag',
+            fields: [
+                { description: 'Name', name: 'name', type: 'text' }
+            ]
         }
     };
     
