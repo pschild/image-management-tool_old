@@ -1,4 +1,4 @@
-imt.controller('ImageController', function ($scope, $location, $stateParams, ImageService, PersonService, PlaceService, TagService, AlertifyService) {
+imt.controller('ImageController', function ($scope, $location, $stateParams, $q, ImageService, PersonService, PlaceService, TagService, AlertifyService) {
     $scope.multipleEdit = $stateParams.id ? false : true;
 
     if (!$scope.multipleEdit) {
@@ -41,11 +41,14 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, Ima
                 AlertifyService.success('Bild gespeichert');
             });
         } else {
+            var promises = [];
             $scope.images.forEach(function(image) {
                 image = _.extend(image, $scope.image);
-                ImageService.update(image).then(function() {
-                    AlertifyService.success('Bild gespeichert');
-                });
+                promises.push(ImageService.update(image));
+            });
+
+            $q.all(promises).then(function() {
+                AlertifyService.success('Alle Bilder gespeichert');
             });
         }
     };
@@ -54,7 +57,7 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, Ima
         AlertifyService.confirm('Bild löschen', 'Sind Sie sich, dass Sie dieses Bild löschen wollen?', function() {
             ImageService.delete($scope.image.id).then(function() {
                 AlertifyService.success('Bild gelöscht');
-                $location.path('files');
+                $location.path('files/' + $scope.image.path);
             });
         });
     };
