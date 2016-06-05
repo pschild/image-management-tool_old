@@ -58,4 +58,15 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, Ima
             });
         });
     };
+
+    $scope.cancel = function() {
+        var path;
+        if (!$scope.multipleEdit) {
+            path = $scope.image.path;
+        } else {
+            path = $scope.images[0].path;
+        }
+
+        $location.path('files/' + path);
+    };
 });
