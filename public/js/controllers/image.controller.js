@@ -10,13 +10,34 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, $q,
             }
         });
     } else {
+        var promises = [];
+
+        $scope.imageIds = ImageService.getImageIdsForMultipleEdit();
+        $scope.imageIds.forEach(function(imageId) {
+            promises.push(ImageService.get(imageId));
+        });
+
         $scope.images = [];
         $scope.image = {};
-        $scope.imageIds = ImageService.getImageIdsForMultipleEdit();
+        $q.all(promises).then(function(responses) {
+            responses.forEach(function(image) {
+                $scope.images.push(image.data);
+            });
 
-        $scope.imageIds.forEach(function(imageId) {
-            ImageService.get(imageId).then(function(response) {
-                $scope.images.push(response.data);
+            // comment, Place/placeId, Tags[], shotAt
+            $scope.image.comment = findCommons('comment', $scope.images);
+
+            var commonShotAt = findCommons('shotAt', $scope.images);
+            if (commonShotAt) {
+                $scope.image.shotAt = new Date(commonShotAt);
+            }
+
+            $scope.image.Place = findCommons('Place', $scope.images);
+
+            $scope.image.Tags = findCommons('Tags', $scope.images, function(tag) {
+                if (tag) {
+                    return tag.id;
+                }
             });
         });
     }
@@ -72,4 +93,34 @@ imt.controller('ImageController', function ($scope, $location, $stateParams, $q,
 
         $location.path('files/' + path);
     };
+
+    function findCommons(property, collection, reducerFn) {
+        var difference = false;
+        var returnValue = undefined;
+        var compareValue = undefined;
+
+        var currentCompareValue;
+
+        collection.forEach(function(item) {
+            currentCompareValue = reducerFn ? reducerFn.apply(this, item[property]) : item[property];
+            if (!compareValue) {
+                compareValue = currentCompareValue;
+            }
+
+            if (!returnValue) {
+                returnValue = item[property];
+                return;
+            }
+
+            if (!difference) {
+                if (typeof item[property] == 'string') {
+                    difference = compareValue != currentCompareValue;
+                } else if (typeof item[property] == 'object') {
+                    difference = !_.isEqual(compareValue, currentCompareValue);
+                }
+            }
+        });
+
+        return difference ? undefined : returnValue;
+    }
 });
