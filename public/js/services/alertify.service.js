@@ -1,8 +1,8 @@
 imt.factory('AlertifyService', function () {
     alertify.defaults.transition = 'zoom';
 
-    alertify.defaults.theme.ok = 'btn btn-primary';
-    alertify.defaults.theme.cancel = 'btn btn-danger';
+    alertify.defaults.theme.ok = 'btn btn-success';
+    alertify.defaults.theme.cancel = 'btn btn-default';
     alertify.defaults.theme.input = 'form-control';
 
     return {
