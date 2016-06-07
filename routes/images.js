@@ -4,6 +4,10 @@ var imageService = require('../services/imageService');
 module.exports = function(app) {
 
     app.get('/api/test', function (req, res) {
+        models.sequelize.query('SELECT * FROM images WHERE id = ?', { replacements: [2], model: models.Image }).then(function(images){
+            console.log(images);
+        });
+
 //        models.Image.findAll({
 //            include: [
 //                { model: models.Place, where: { name: { $like: '%uis%' } } },
